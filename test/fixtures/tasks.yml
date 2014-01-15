@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  assignee_id: 
+  assigner_id: 
+  name: MyString
+  start_at: 2014-01-16 01:16:53
+  end_at: 2014-01-16 01:16:53
+  is_open: false
+
+two:
+  assignee_id: 
+  assigner_id: 
+  name: MyString
+  start_at: 2014-01-16 01:16:53
+  end_at: 2014-01-16 01:16:53
+  is_open: false

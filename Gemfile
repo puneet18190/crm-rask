@@ -11,6 +11,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'twitter-bootstrap-rails'
 gem 'devise'
+gem 'acts-as-taggable-on'
 
 group :doc do
   gem 'sdoc', require: false

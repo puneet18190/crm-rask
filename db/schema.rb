@@ -11,10 +11,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115192307) do
+ActiveRecord::Schema.define(version: 20140115201832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "votes",            default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "scores", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.integer  "grade"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scores", ["task_id"], name: "index_scores_on_task_id", using: :btree
+  add_index "scores", ["user_id"], name: "index_scores_on_user_id", using: :btree
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "tasks", force: true do |t|
+    t.integer  "assignee_id"
+    t.integer  "assigner_id"
+    t.string   "name"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.boolean  "is_open",       default: true
+    t.integer  "reported_back", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["assignee_id"], name: "index_tasks_on_assignee_id", using: :btree
+  add_index "tasks", ["assigner_id"], name: "index_tasks_on_assigner_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name",                          null: false
