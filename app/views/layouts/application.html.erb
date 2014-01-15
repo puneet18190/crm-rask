@@ -35,7 +35,7 @@
 							<a class="user-menu dropdown-toggle" href="#" data-toggle="dropdown">
 								<img alt="Jason's Photo" src="assets/user.jpg" class="nav-user-photo" />
 								<span id="user_info">
-									<small>Welcome,</small> Jason
+									<small>Welcome,</small> <%= current_user.first_name %>
 								</span>
 								<i class="icon-caret-down"></i>
 							</a>
@@ -74,7 +74,7 @@
 
 				<ul class="nav nav-list">
 
-					<li id="sidebar-dashboard">
+					<li id="nav-dashboard">
 						<%= link_to root_path do %>
 							<i class="icon-dashboard"></i>
 							<span>Dashboard</span>
