@@ -1,0 +1,16 @@
+production: &defaults
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: Enbake_Score_development
+  pool: 5
+  username: user
+  password: password
+
+development:
+  <<: *defaults
+  database: Enbake_Score_development
+
+test:
+  <<: *defaults
+  database: Enbake_Score_test
