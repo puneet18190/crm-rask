@@ -11,34 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115201832) do
+ActiveRecord::Schema.define(version: 20140117070229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
-    t.integer  "user_id"
     t.text     "description"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.integer  "votes",            default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
-  create_table "scores", force: true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
-    t.integer  "grade"
-    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "scores", ["task_id"], name: "index_scores_on_task_id", using: :btree
-  add_index "scores", ["user_id"], name: "index_scores_on_user_id", using: :btree
+  add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -59,19 +46,27 @@ ActiveRecord::Schema.define(version: 20140115201832) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "tasks", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "estimate_time"
+    t.integer  "actual_time"
+    t.boolean  "is_open"
+    t.datetime "closed_at"
+    t.integer  "closed_by_id"
     t.integer  "assignee_id"
-    t.integer  "assigner_id"
-    t.string   "name"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.boolean  "is_open",       default: true
-    t.integer  "reported_back", default: 0
+    t.integer  "report_person_id"
+    t.integer  "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "tasks", ["assignee_id"], name: "index_tasks_on_assignee_id", using: :btree
-  add_index "tasks", ["assigner_id"], name: "index_tasks_on_assigner_id", using: :btree
+  add_index "tasks", ["report_person_id"], name: "index_tasks_on_report_person_id", using: :btree
+
+  create_table "tasks_users", id: false, force: true do |t|
+    t.integer "task_id"
+    t.integer "user_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name",                          null: false

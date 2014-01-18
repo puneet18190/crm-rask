@@ -1,10 +1,9 @@
-class CreateScores < ActiveRecord::Migration
+class CreateComments < ActiveRecord::Migration
   def change
-    create_table :scores do |t|
+    create_table :comments do |t|
+      t.text :description
       t.references :user, index: true
       t.references :task, index: true
-      t.integer :grade
-      t.text :description
 
       t.timestamps
     end

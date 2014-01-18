@@ -1,17 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  assignee_id: 
-  assigner_id: 
-  name: MyString
-  start_at: 2014-01-16 01:16:53
-  end_at: 2014-01-16 01:16:53
+  title: MyString
+  description: MyText
+  estimate_time: 
+  actual_time: 1
   is_open: false
+  closed_at: 2014-01-17 12:28:35
+  assignee_id: 
+  report_person_id: 
+  rating: 1
 
 two:
-  assignee_id: 
-  assigner_id: 
-  name: MyString
-  start_at: 2014-01-16 01:16:53
-  end_at: 2014-01-16 01:16:53
+  title: MyString
+  description: MyText
+  estimate_time: 
+  actual_time: 1
   is_open: false
+  closed_at: 2014-01-17 12:28:35
+  assignee_id: 
+  report_person_id: 
+  rating: 1
