@@ -11,4 +11,5 @@
 // about supported directives.
 //
 //= require jquery-1.9.1.min
+//= require jquery-ui-1.10.2.custom.min
 //= require bootstrap.min

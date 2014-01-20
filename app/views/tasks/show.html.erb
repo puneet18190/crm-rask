@@ -1,63 +1,76 @@
-<div class="widget-box transparent">
-		
-		<div class="widget-header">
-			<h4 class="lighter smaller"><i class="icon-rss orange"></i>RECENT</h4>
-			<div class="widget-toolbar no-border">
-				<ul class="nav nav-tabs" id="recent-tab">
-					<li class="active"><a data-toggle="tab" href="#task-tab">Tasks</a></li>
-					<li><a data-toggle="tab" href="#member-tab">Members</a></li>
-					<li><a data-toggle="tab" href="#comment-tab">Comments</a></li>
-				</ul>
-			</div>
+<%= content_for :breadcrumb do %>
+	<ul class="breadcrumb">
+		<li><i class="icon-home"></i> <a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
+		<li class="active">Task</li>
+	</ul><!--.breadcrumb-->
+<% end %>
+
+<% content_for :header do %>
+	<div class="page-header position-relative inline">
+		<h1 class="span9">Task Details</h1>
+		<span class="pull-right">
+			<a class="btn btn-primary btn-small" href="<%= edit_task_path %>"><i class="icon-edit"></i>Edit</a>
+			<a class="btn btn-primary btn-small" href="<%= new_task_path %>"><i class="icon-check"></i>Rate</a>
+		</span>
+	</div><!--/page-header-->
+<% end %>
+
+<div class="dialogs">
+	<div class="itemdiv dialogdiv">
+		<div class="user">
+			<%= image_tag 'avatar4.png'%>
 		</div>
 		
-		<div class="widget-body">
-		 <div class="widget-main padding-5">
-			<div class="tab-content padding-8">
-				<div id="task-tab" class="tab-pane active">
-					<h4 class="smaller lighter green"><i class="icon-list"></i> Sortable Lists</h4>
-					<ul id="tasks" class="item-list">
-						<li class="item-orange clearfix">
-							<label class="inline"><input type="checkbox" /><span class="lbl"> Answering customer questions</span></label>
-							<div class="pull-right easy-pie-chart percentage" data-size="30" data-color="#ECCB71" data-percent="42">
-								<span class="percent">42</span>%
-							</div>
-						</li>
-						<li class="item-red clearfix">
-							<label class="inline"><input type="checkbox" /><span class="lbl"> Fixing bugs</span></label>
-							<div class="pull-right">
-								<div class="btn-group">
-									<button class="btn btn-mini btn-info"><i class="icon-edit"></i></button>
-									<button class="btn btn-mini btn-danger "><i class="icon-trash"></i></button>
-									<button class="btn btn-mini btn-yellow"><i class="icon-flag"></i></button>
-								</div>
-							</div>
-						</li>
-						<li class="item-default clearfix">
-							<label class="inline"><input type="checkbox" /><span class="lbl"> Adding new features</span></label>
-							<div class="inline pull-right position-relative">
-								<button class="btn btn-minier bigger btn-yellow dropdown-toggle" data-toggle="dropdown"><i class="icon-angle-down icon-only"></i></button>
-								<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-closer">
-									<li><a href="#" class="tooltip-success" data-rel="tooltip" title="Mark&nbsp;as&nbsp;done" data-placement="left"><span class="green"><i class="icon-ok"></i></span></a></li>
-									<li><a href="#" class="tooltip-error" data-rel="tooltip" title="Delete" data-placement="left"><span class="red"><i class="icon-trash"></i></span></a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="item-blue">
-							<label class="inline"><input type="checkbox" /><span class="lbl"> Upgrading scripts used in template</span></label>
-						</li>
-						<li class="item-grey">
-							<label class="inline"><input type="checkbox" /><span class="lbl"> Adding new skins</span></label>
-						</li>
-						<li class="item-green">
-							<label class="inline"><input type="checkbox" /><span class="lbl"> Updating server software up</span></label>
-						</li>
-						<li class="item-pink">
-							<label class="inline"><input type="checkbox" /><span class="lbl"> Cleaning up</span></label>
-						</li>
-					</ul>
+		<div class="body">
+			<div class="name"><%= link_to @task.assignee.name, '#'%> assigned to <%= link_to @task.report_person.name, '#'%> <%= time_ago_in_words(@task.created_at) %> ago</div>
+			<div class="text" style="margin-top:5px;"><h3><%= @task.title %></h3></div>
+			<div class="text" style="margin-top:10px;"><%= @task.description %></div>
+		</div>
+	</div>
+
+
+	<div class="itemdiv dialogdiv">
+		<div class="user">
+			<%= image_tag 'avatar.png'%>
+		</div>
+		
+		<div class="body">
+			<div class="name"><a href="#">Vishal</a> comments</div>
+			<div class="text">Sanjay, Can you please refer to some cap script that you already wrote for any project. Otherwise please paste some code over here. i'll refer that.</div>
+		</div>
+	</div>
+
+
+	<div class="itemdiv dialogdiv">
+		<div class="user">
+			<%= image_tag 'avatar4.png'%>
+		</div>
+		
+		<div class="body well">
+			<form>
+				<div class="input-append">
+					<input placeholder="Type your message here ..." type="text" class="input-xxlarge" name="message" />
+					<button class="btn btn-small btn-info no-radius" onclick="return false;"><i class="icon-share-alt"></i> <span class="hidden-phone">Send</span></button>
 				</div>
-			</div>
-		 </div>
+			</form>
 		</div>
+	</div>
+
 </div>
+
+
+<%= content_for :page_specific_scripts do %>
+	<%= javascript_include_tag "bootstrap-timepicker.min" %>
+<% end %>
+
+<%= content_for :inline_scripts do %>
+	<script type='text/javascript'>
+		window.onload = function() {
+			
+		};
+		$('#task_estimate_time').timepicker({
+			minuteStep: 1,
+			showMeridian: false
+		});
+	</script>
+<% end %>
